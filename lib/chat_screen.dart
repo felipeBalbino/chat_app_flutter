@@ -61,8 +61,6 @@ class _ChatScreenState extends State<ChatScreen> {
         )
       );
       return null;
-    }else{
-      print(user.uid);
     }
 
     Map<String, dynamic> data = {
@@ -75,7 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (imgFile != null) {
       StorageUploadTask task = FirebaseStorage.instance
           .ref()
-          .child(DateTime.now().millisecondsSinceEpoch.toString())
+          .child(user.uid + DateTime.now().millisecondsSinceEpoch.toString())
           .putFile(imgFile);
 
       setState(() {
@@ -137,7 +135,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     return ListView.builder(
                       itemCount: documents.length,
                       itemBuilder: (context, index) {
-                        return ChatMessage(documents[index].data, true);
+                        return ChatMessage(
+                          documents[index].data,
+                            documents[index].data['uid'] == _currentUser?.uid
+                        );
                       },
                     );
                 }
