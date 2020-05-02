@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class TextComposer extends StatefulWidget {
+
   TextComposer(this.sendMessage);
 
   final Function({String text, File imgFile}) sendMessage;
